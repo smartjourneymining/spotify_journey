@@ -1,0 +1,4 @@
+[submodule "journepy"]
+	path = journepy
+	url = git@github.com:smartjourneymining/journepy.git
+	branch = probabilistic_uppaal_mapping

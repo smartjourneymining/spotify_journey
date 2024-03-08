@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+clock c;
+clock time;
+
+const int LONG_PAUSE = 10;
+
+hybrid clock duration_c, danceability_c;
+
+int track, min_duration, max_duration, danceability;
+</declaration>
+	<template>
+		<name x="5" y="5">TwoTracks</name>
+		<declaration>// Place local declarations here.
+</declaration>
+		<location id="id0" x="374" y="518">
+			<name x="364" y="484">Editorial_Playlist</name>
+			<urgent/>
+		</location>
+		<location id="id1" x="739" y="357">
+			<name x="729" y="323">NotSkipped_1</name>
+			<label kind="invariant" x="722" y="374">c &lt;= max_duration &amp;&amp; danceability_c' == danceability</label>
+		</location>
+		<location id="id2" x="731" y="595">
+			<name x="721" y="561">Skipped_1</name>
+			<label kind="invariant" x="721" y="612">c &lt;= (min_duration - 1) &amp;&amp; danceability_c' == 1</label>
+		</location>
+		<location id="id3" x="493" y="476">
+			<name x="483" y="442">Track_1</name>
+			<urgent/>
+		</location>
+		<location id="id4" x="450" y="748">
+			<name x="440" y="714">Track_2</name>
+			<urgent/>
+		</location>
+		<location id="id5" x="739" y="782">
+			<name x="729" y="748">NotSkipped_2</name>
+			<label kind="invariant" x="729" y="799">c &lt;= max_duration &amp;&amp; danceability_c' == danceability</label>
+		</location>
+		<location id="id6" x="1164" y="655">
+			<name x="1154" y="621">LongPause</name>
+			<label kind="invariant" x="1154" y="672">duration_c' == 0 &amp;&amp; c &lt;= LONG_PAUSE &amp;&amp; danceability_c' == 0</label>
+		</location>
+		<location id="id7" x="297" y="416">
+			<name x="287" y="382">SessionEnd</name>
+			<label kind="invariant" x="287" y="433">duration_c' == 0 &amp;&amp; danceability_c' == 0</label>
+		</location>
+		<branchpoint id="id8" x="968" y="663"/>
+		<branchpoint id="id9" x="586" y="748"/>
+		<branchpoint id="id10" x="603" y="476"/>
+		<init ref="id0"/>
+		<transition id="id11">
+			<source ref="id0"/>
+			<target ref="id7"/>
+		</transition>
+		<transition id="id12">
+			<source ref="id9"/>
+			<target ref="id2"/>
+			<label kind="probability" x="604" y="688">1</label>
+		</transition>
+		<transition id="id13" controllable="false">
+			<source ref="id6"/>
+			<target ref="id0"/>
+			<label kind="guard" x="832" y="544">c &gt;= (LONG_PAUSE / 2)</label>
+		</transition>
+		<transition id="id14">
+			<source ref="id8"/>
+			<target ref="id0"/>
+			<label kind="probability" x="272" y="876">1</label>
+			<nail x="977" y="842"/>
+			<nail x="263" y="842"/>
+			<nail x="263" y="485"/>
+		</transition>
+		<transition id="id15">
+			<source ref="id8"/>
+			<target ref="id6"/>
+			<label kind="probability" x="986" y="676">10</label>
+		</transition>
+		<transition id="id16" controllable="false">
+			<source ref="id5"/>
+			<target ref="id8"/>
+			<label kind="guard" x="713" y="697">c &gt;= min_duration</label>
+			<label kind="assignment" x="757" y="722">c = 0</label>
+		</transition>
+		<transition id="id17">
+			<source ref="id9"/>
+			<target ref="id5"/>
+			<label kind="probability" x="604" y="735">3</label>
+		</transition>
+		<transition id="id18" controllable="false">
+			<source ref="id4"/>
+			<target ref="id9"/>
+			<label kind="assignment" x="468" y="748">track += 1,
+c = 0,
+max_duration = 4,
+min_duration = 3,
+danceability = 3</label>
+		</transition>
+		<transition id="id19">
+			<source ref="id0"/>
+			<target ref="id4"/>
+			<label kind="guard" x="433" y="621">track &lt; 20</label>
+			<nail x="374" y="535"/>
+		</transition>
+		<transition id="id20" controllable="false">
+			<source ref="id2"/>
+			<target ref="id0"/>
+			<label kind="guard" x="392" y="556">c &gt;= 1</label>
+			<nail x="374" y="595"/>
+		</transition>
+		<transition id="id21" controllable="false">
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="392" y="327">c &gt;= min_duration</label>
+			<nail x="374" y="366"/>
+		</transition>
+		<transition id="id22">
+			<source ref="id10"/>
+			<target ref="id2"/>
+			<label kind="probability" x="621" y="552">10</label>
+		</transition>
+		<transition id="id23">
+			<source ref="id10"/>
+			<target ref="id1"/>
+			<label kind="probability" x="621" y="404">1</label>
+		</transition>
+		<transition id="id24" controllable="false">
+			<source ref="id3"/>
+			<target ref="id10"/>
+			<label kind="assignment" x="518" y="485">c = 0,
+track += 1,
+max_duration = 5,
+min_duration = 4,
+danceability = 5</label>
+		</transition>
+		<transition id="id25">
+			<source ref="id0"/>
+			<target ref="id3"/>
+			<label kind="guard" x="392" y="442">track &lt; 20</label>
+		</transition>
+	</template>
+	<system>// List one or more processes to be composed into a system.
+system TwoTracks;
+</system>
+	<queries>
+		<query>
+			<formula>E&lt;&gt; TwoTracks.SessionEnd &amp;&amp; track == 20</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2024-01-26 21:32:37 +0100">
+			</result>
+		</query>
+		<query>
+			<formula>strategy long = maxE(duration_c) [&lt;= 1000]: &lt;&gt; TwoTracks.SessionEnd</formula>
+			<comment/>
+		</query>
+		<query>
+			<formula>strategy opt = maxE(danceability_c) [&lt;= 1000]: &lt;&gt; TwoTracks.SessionEnd</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2024-01-29 10:46:25 +0100">
+			</result>
+		</query>
+	</queries>
+</nta>

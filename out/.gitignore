@@ -1,0 +1,10 @@
+# File: out/.gitignore
+# Ignore everything in this directory
+*
+!uppaal_models/
+uppaal_models/*
+!uppaal_models/generated.q
+!uppaal_models/generated_new.q
+!reduced_plot_hand.dot
+# Except for this file
+!.gitignore

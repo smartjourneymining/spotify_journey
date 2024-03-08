@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>
+const int LONG_PAUSE = 10;
+const int SHORT_PAUSE = 5;
+const int MAX_TRACK = 20;
+clock time, c;
+bool visited_start = false;
+hybrid clock duration_c, acousticness_c, danceability_c, energy_c;
+int track, min_duration, max_duration, acousticness, danceability, energy;
+int max(int a, int b){if(b&lt;a){return a;} else{return b;}}
+</declaration>
+<template><name x="5" y="5">SpotifyJourney</name>
+<location id="id0" x="336" y="1553">
+<name x="336" y="1573">start</name>
+ <urgent/>
+</location>
+<location id="id1" x="835" y="1558">
+<name x="835" y="1578">q1startprofile056</name>
+ <urgent/>
+</location>
+<location id="id2" x="860" y="1677">
+<name x="860" y="1697">q3startprofile166</name>
+ <urgent/>
+</location>
+<location id="id3" x="913" y="1785">
+<name x="913" y="1805">q2startprofile156</name>
+ <urgent/>
+</location>
+<location id="id4" x="111" y="1008">
+<name x="111" y="1028">q5startprofile345</name>
+ <urgent/>
+</location>
+<location id="id5" x="137" y="1141">
+<name x="137" y="1161">q4startprofile178</name>
+ <urgent/>
+</location>
+<location id="id6" x="1709" y="1179">
+<name x="1709" y="1199">q6selectcontextusercollection</name>
+ <urgent/>
+</location>
+<location id="id7" x="876" y="713">
+<name x="876" y="733">q7selectcontextcatalog</name>
+ <urgent/>
+</location>
+<location id="id8" x="1972" y="1449">
+<name x="1972" y="1469">q8played10minor075</name>
+ <urgent/>
+</location>
+<location id="id9" x="2056" y="597">
+<name x="2056" y="617">q9played0major074</name>
+ <urgent/>
+</location>
+<location id="id10" x="1894" y="1636">
+<name x="1894" y="1656">q10played10minor285</name>
+ <urgent/>
+</location>
+<location id="id11" x="1433" y="1188">
+<name x="1433" y="1208">q16played10minor058</name>
+ <urgent/>
+</location>
+<location id="id12" x="1754" y="1578">
+<name x="1754" y="1598">q18played10major146</name>
+ <urgent/>
+</location>
+<location id="id13" x="2181" y="768">
+<name x="2181" y="788">q20played10major335</name>
+ <urgent/>
+</location>
+<location id="id14" x="1981" y="1568">
+<name x="1981" y="1588">q23played0major048</name>
+ <urgent/>
+</location>
+<location id="id15" x="1341" y="1000">
+<name x="1341" y="1020">q26played10major067</name>
+ <urgent/>
+</location>
+<location id="id16" x="1232" y="883">
+<name x="1232" y="903">q27played10major077</name>
+ <urgent/>
+</location>
+<location id="id17" x="2399" y="924">
+<name x="2399" y="944">q31played10major065</name>
+ <urgent/>
+</location>
+<location id="id18" x="1134" y="1567">
+<name x="1134" y="1587">q37played0major026</name>
+ <urgent/>
+</location>
+<location id="id19" x="2318" y="669">
+<name x="2318" y="689">q33played0minor346</name>
+ <urgent/>
+</location>
+<location id="id20" x="2352" y="795">
+<name x="2352" y="815">q35played10major267</name>
+ <urgent/>
+</location>
+<location id="id21" x="2239" y="1031">
+<name x="2239" y="1051">q36played10major444</name>
+ <urgent/>
+</location>
+<location id="id22" x="2291" y="1290">
+<name x="2291" y="1310">q39played10major058</name>
+ <urgent/>
+</location>
+<location id="id23" x="1152" y="961">
+<name x="1152" y="981">q40played10major175</name>
+ <urgent/>
+</location>
+<location id="id24" x="1521" y="1709">
+<name x="1521" y="1729">q41played0minor179</name>
+ <urgent/>
+</location>
+<location id="id25" x="1314" y="1805">
+<name x="1314" y="1825">q46played10major068</name>
+ <urgent/>
+</location>
+<location id="id26" x="2379" y="1186">
+<name x="2379" y="1206">q43played10minor675</name>
+ <urgent/>
+</location>
+<location id="id27" x="1203" y="1688">
+<name x="1203" y="1708">q48played0minor185</name>
+ <urgent/>
+</location>
+<location id="id28" x="2370" y="1052">
+<name x="2370" y="1072">q47played0major067</name>
+ <urgent/>
+</location>
+<location id="id29" x="1496" y="841">
+<name x="1496" y="861">q51played10major066</name>
+ <urgent/>
+</location>
+<location id="id30" x="2032" y="771">
+<name x="2032" y="791">q52played0major057</name>
+ <urgent/>
+</location>
+<location id="id31" x="1356" y="1687">
+<name x="1356" y="1707">q54played0major085</name>
+ <urgent/>
+</location>
+<location id="id32" x="2146" y="480">
+<name x="2146" y="500">q53played10minor583</name>
+ <urgent/>
+</location>
+<location id="id33" x="2220" y="603">
+<name x="2220" y="623">q55played0minor048</name>
+ <urgent/>
+</location>
+<location id="id34" x="1929" y="515">
+<name x="1929" y="535">q57played10major158</name>
+ <urgent/>
+</location>
+<location id="id35" x="1778" y="483">
+<name x="1778" y="503">q58played0minor058</name>
+ <urgent/>
+</location>
+<location id="id36" x="2173" y="903">
+<name x="2173" y="923">q59played0minor028</name>
+ <urgent/>
+</location>
+<location id="id37" x="1755" y="615">
+<name x="1755" y="635">q61played10minor158</name>
+ <urgent/>
+</location>
+<location id="id38" x="1490" y="1431">
+<name x="1490" y="1451">q62played10major056</name>
+ <urgent/>
+</location>
+<location id="id39" x="1610" y="1350">
+<name x="1610" y="1370">q63played70major078</name>
+ <urgent/>
+</location>
+<location id="id40" x="1229" y="1235">
+<name x="1229" y="1255">q65played90minor077</name>
+ <urgent/>
+</location>
+<location id="id41" x="1374" y="1335">
+<name x="1374" y="1355">q67played10minor086</name>
+ <urgent/>
+</location>
+<location id="id42" x="1487" y="1829">
+<name x="1487" y="1849">q66played10major164</name>
+ <urgent/>
+</location>
+<location id="id43" x="1956" y="1308">
+<name x="1956" y="1328">q68played10minor068</name>
+ <urgent/>
+</location>
+<location id="id44" x="1698" y="1695">
+<name x="1698" y="1715">q69played10major375</name>
+ <urgent/>
+</location>
+<location id="id45" x="1568" y="1115">
+<name x="1568" y="1135">q72played10major078</name>
+ <urgent/>
+</location>
+<location id="id46" x="2223" y="1199">
+<name x="2223" y="1219">q70played70major254</name>
+ <urgent/>
+</location>
+<location id="id47" x="1824" y="1277">
+<name x="1824" y="1297">q71played50major851</name>
+ <urgent/>
+</location>
+<location id="id48" x="1664" y="1811">
+<name x="1664" y="1831">q73played10major365</name>
+ <urgent/>
+</location>
+<location id="id49" x="2100" y="1168">
+<name x="2100" y="1188">q74played10minor046</name>
+ <urgent/>
+</location>
+<location id="id50" x="1831" y="1746">
+<name x="1831" y="1766">q75played10major674</name>
+ <urgent/>
+</location>
+<location id="id51" x="1727" y="1435">
+<name x="1727" y="1455">q76played10major176</name>
+ <urgent/>
+</location>
+<location id="id52" x="619" y="944">
+<name x="619" y="964">q11played10minor077</name>
+ <urgent/>
+</location>
+<location id="id53" x="492" y="798">
+<name x="492" y="818">q12played10major742</name>
+ <urgent/>
+</location>
+<location id="id54" x="1211" y="133">
+<name x="1211" y="153">q17played70minor533</name>
+ <urgent/>
+</location>
+<location id="id55" x="760" y="594">
+<name x="760" y="614">q19played10major039</name>
+ <urgent/>
+</location>
+<location id="id56" x="1334" y="177">
+<name x="1334" y="197">q25played10minor234</name>
+ <urgent/>
+</location>
+<location id="id57" x="475" y="968">
+<name x="475" y="988">q22played70major059</name>
+ <urgent/>
+</location>
+<location id="id58" x="647" y="1101">
+<name x="647" y="1121">q30played60major049</name>
+ <urgent/>
+</location>
+<location id="id59" x="509" y="1119">
+<name x="509" y="1139">q28played10minor186</name>
+ <urgent/>
+</location>
+<location id="id60" x="548" y="689">
+<name x="548" y="709">q29played10major641</name>
+ <urgent/>
+</location>
+<location id="id61" x="596" y="1242">
+<name x="596" y="1262">q34played10major268</name>
+ <urgent/>
+</location>
+<location id="id62" x="648" y="532">
+<name x="648" y="552">q32played10major258</name>
+ <urgent/>
+</location>
+<location id="id63" x="1258" y="302">
+<name x="1258" y="322">q42played10major235</name>
+ <urgent/>
+</location>
+<location id="id64" x="1150" y="226">
+<name x="1150" y="246">q38played10minor566</name>
+ <urgent/>
+</location>
+<location id="id65" x="1108" y="637">
+<name x="1108" y="657">q44played10major278</name>
+ <urgent/>
+</location>
+<location id="id66" x="1235" y="772">
+<name x="1235" y="792">q45played10minor066</name>
+ <urgent/>
+</location>
+<location id="id67" x="933" y="298">
+<name x="933" y="318">q49played10minor067</name>
+ <urgent/>
+</location>
+<location id="id68" x="1058" y="271">
+<name x="1058" y="291">q50played10major753</name>
+ <urgent/>
+</location>
+<location id="id69" x="878" y="482">
+<name x="878" y="502">q56played10major861</name>
+ <urgent/>
+</location>
+<location id="id70" x="1245" y="1122">
+<name x="1245" y="1142">q13skipped</name>
+<label kind="invariant" x="1245" y="1092">c &lt;= max(1,(min_duration - 1)) &amp;&amp; acousticness_c' == 1 &amp;&amp; danceability_c' == 1 &amp;&amp; energy_c' == 1</label>
+</location>
+<location id="id71" x="1697" y="802">
+<name x="1697" y="822">q14notskipped</name>
+<label kind="invariant" x="1697" y="772">c &lt;= max(1,max_duration) &amp;&amp; acousticness_c' == acousticness &amp;&amp; danceability_c' == danceability &amp;&amp; energy_c' == energy</label>
+</location>
+<location id="id72" x="1376" y="718">
+<name x="1376" y="738">q15longpause</name>
+<label kind="invariant" x="1376" y="688">c &lt;= LONG_PAUSE &amp;&amp; acousticness_c' == 0 &amp;&amp; danceability_c' == 0 &amp;&amp; energy_c' == 0 &amp;&amp; duration_c' == 0</label>
+</location>
+<location id="id73" x="1516" y="358">
+<name x="1516" y="378">q21selectcontextradio</name>
+ <urgent/>
+</location>
+<location id="id74" x="1845" y="18">
+<name x="1845" y="38">q24song0major279</name>
+ <urgent/>
+</location>
+<location id="id75" x="1669" y="274">
+<name x="1669" y="294">q60song10major039</name>
+ <urgent/>
+</location>
+<location id="id76" x="1809" y="339">
+<name x="1809" y="359">q64song10major067</name>
+ <urgent/>
+</location>
+<location id="id77" x="1339" y="549">
+<name x="1339" y="569">end</name>
+<label kind="invariant" x="1339" y="519">acousticness_c' == 0 &amp;&amp; danceability_c' == 0 &amp;&amp; energy_c' == 0 &amp;&amp; duration_c' == 0</label>
+</location><branchpoint id="id79" x="1809" y = "1179"/>
+<branchpoint id="id80" x="976" y = "713"/>
+<branchpoint id="id81" x="2072" y = "1449"/>
+<branchpoint id="id82" x="2156" y = "597"/>
+<branchpoint id="id83" x="1994" y = "1636"/>
+<branchpoint id="id84" x="1533" y = "1188"/>
+<branchpoint id="id85" x="1854" y = "1578"/>
+<branchpoint id="id86" x="2281" y = "768"/>
+<branchpoint id="id87" x="2081" y = "1568"/>
+<branchpoint id="id88" x="1441" y = "1000"/>
+<branchpoint id="id89" x="1332" y = "883"/>
+<branchpoint id="id90" x="2499" y = "924"/>
+<branchpoint id="id91" x="1234" y = "1567"/>
+<branchpoint id="id92" x="2418" y = "669"/>
+<branchpoint id="id93" x="2452" y = "795"/>
+<branchpoint id="id94" x="2339" y = "1031"/>
+<branchpoint id="id95" x="2391" y = "1290"/>
+<branchpoint id="id96" x="1252" y = "961"/>
+<branchpoint id="id97" x="1621" y = "1709"/>
+<branchpoint id="id98" x="1414" y = "1805"/>
+<branchpoint id="id99" x="2479" y = "1186"/>
+<branchpoint id="id100" x="1303" y = "1688"/>
+<branchpoint id="id101" x="2470" y = "1052"/>
+<branchpoint id="id102" x="1596" y = "841"/>
+<branchpoint id="id103" x="2132" y = "771"/>
+<branchpoint id="id104" x="1456" y = "1687"/>
+<branchpoint id="id105" x="2246" y = "480"/>
+<branchpoint id="id106" x="2320" y = "603"/>
+<branchpoint id="id107" x="2029" y = "515"/>
+<branchpoint id="id108" x="1878" y = "483"/>
+<branchpoint id="id109" x="2273" y = "903"/>
+<branchpoint id="id110" x="1855" y = "615"/>
+<branchpoint id="id111" x="1590" y = "1431"/>
+<branchpoint id="id112" x="1710" y = "1350"/>
+<branchpoint id="id113" x="1329" y = "1235"/>
+<branchpoint id="id114" x="1474" y = "1335"/>
+<branchpoint id="id115" x="1587" y = "1829"/>
+<branchpoint id="id116" x="2056" y = "1308"/>
+<branchpoint id="id117" x="1798" y = "1695"/>
+<branchpoint id="id118" x="1668" y = "1115"/>
+<branchpoint id="id119" x="2323" y = "1199"/>
+<branchpoint id="id120" x="1924" y = "1277"/>
+<branchpoint id="id121" x="1764" y = "1811"/>
+<branchpoint id="id122" x="2200" y = "1168"/>
+<branchpoint id="id123" x="1931" y = "1746"/>
+<branchpoint id="id124" x="1827" y = "1435"/>
+<branchpoint id="id125" x="719" y = "944"/>
+<branchpoint id="id126" x="592" y = "798"/>
+<branchpoint id="id127" x="1311" y = "133"/>
+<branchpoint id="id128" x="860" y = "594"/>
+<branchpoint id="id129" x="1434" y = "177"/>
+<branchpoint id="id130" x="575" y = "968"/>
+<branchpoint id="id131" x="747" y = "1101"/>
+<branchpoint id="id132" x="609" y = "1119"/>
+<branchpoint id="id133" x="648" y = "689"/>
+<branchpoint id="id134" x="696" y = "1242"/>
+<branchpoint id="id135" x="748" y = "532"/>
+<branchpoint id="id136" x="1358" y = "302"/>
+<branchpoint id="id137" x="1250" y = "226"/>
+<branchpoint id="id138" x="1208" y = "637"/>
+<branchpoint id="id139" x="1335" y = "772"/>
+<branchpoint id="id140" x="1033" y = "298"/>
+<branchpoint id="id141" x="1158" y = "271"/>
+<branchpoint id="id142" x="978" y = "482"/>
+<branchpoint id="id143" x="1345" y = "1122"/>
+<branchpoint id="id144" x="1797" y = "802"/>
+<branchpoint id="id145" x="1476" y = "718"/>
+<branchpoint id="id146" x="1945" y = "18"/>
+<branchpoint id="id147" x="1769" y = "274"/>
+<branchpoint id="id148" x="1909" y = "339"/>
+<init ref="id0"/> 
+<transition controllable="false"><source ref="id6"/><target ref="id79"/><label kind="assignment" x="99.29999999999995" y="1209">c = 0</label><label kind="guard" x="1809.0" y="1149">track &lt; MAX_TRACK</label></transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id8"/><label kind="probability" x="1873.2" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id9"/><label kind="probability" x="1957.1000000000001" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id10"/><label kind="probability" x="1795.1000000000001" y="1199">0.038461538461538464</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id11"/><label kind="probability" x="2085.7" y="1199">0.057692307692307696</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id12"/><label kind="probability" x="1764.6000000000001" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id13"/><label kind="probability" x="2081.8999999999996" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id14"/><label kind="probability" x="1881.9" y="1199">0.038461538461538464</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id15"/><label kind="probability" x="2177.6000000000004" y="1199">0.057692307692307696</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id16"/><label kind="probability" x="2285.8" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id17"/><label kind="probability" x="2300.1000000000004" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id18"/><label kind="probability" x="2384.0" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id19"/><label kind="probability" x="2219.0" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id20"/><label kind="probability" x="2253.3" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id21"/><label kind="probability" x="2140.3" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id22"/><label kind="probability" x="2192.6000000000004" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id23"/><label kind="probability" x="2366.5" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id24"/><label kind="probability" x="1997.4" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id25"/><label kind="probability" x="2204.4" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id26"/><label kind="probability" x="2279.8" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id27"/><label kind="probability" x="2315.3" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id28"/><label kind="probability" x="2270.8" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id29"/><label kind="probability" x="2022.4" y="1199">0.038461538461538464</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id30"/><label kind="probability" x="1933.3" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id31"/><label kind="probability" x="2161.8" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id32"/><label kind="probability" x="2046.7" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id33"/><label kind="probability" x="2121.5" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id34"/><label kind="probability" x="1830.1000000000001" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id35"/><label kind="probability" x="1740.1000000000001" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id36"/><label kind="probability" x="2073.7" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id37"/><label kind="probability" x="1763.0" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id38"/><label kind="probability" x="2028.5" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id39"/><label kind="probability" x="1907.9" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id40"/><label kind="probability" x="2289.6000000000004" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id41"/><label kind="probability" x="2144.5" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id42"/><label kind="probability" x="2031.5" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id43"/><label kind="probability" x="1856.9" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id44"/><label kind="probability" x="1820.3" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id45"/><label kind="probability" x="1950.4" y="1199">0.038461538461538464</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id46"/><label kind="probability" x="2124.2" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id47"/><label kind="probability" x="1725.6000000000001" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id48"/><label kind="probability" x="1854.3" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id49"/><label kind="probability" x="2001.3" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id50"/><label kind="probability" x="1732.6000000000001" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id79"/><target ref="id51"/><label kind="probability" x="1791.0" y="1199">0.019230769230769232</label> 
+</transition> 
+<transition controllable="false"><source ref="id7"/><target ref="id80"/><label kind="assignment" x="99.13999999999999" y="743">c = 0</label><label kind="guard" x="976.0" y="683">track &lt; MAX_TRACK</label></transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id52"/><label kind="probability" x="1233.35" y="733">0.058823529411764705</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id53"/><label kind="probability" x="1360.42" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id54"/><label kind="probability" x="1112.1599999999999" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id55"/><label kind="probability" x="1092.31" y="733">0.058823529411764705</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id56"/><label kind="probability" x="1235.46" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id57"/><label kind="probability" x="1376.91" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id58"/><label kind="probability" x="1205.53" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id59"/><label kind="probability" x="1342.95" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id60"/><label kind="probability" x="1304.31" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id61"/><label kind="probability" x="1256.37" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id62"/><label kind="probability" x="1204.18" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id63"/><label kind="probability" x="1159.2600000000002" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id64"/><label kind="probability" x="1051.3600000000001" y="733">0.058823529411764705</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id23"/><label kind="probability" x="1053.06" y="733">0.08823529411764706</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id65"/><label kind="probability" x="1009.7600000000001" y="733">0.14705882352941177</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id66"/><label kind="probability" x="1136.56" y="733">0.058823529411764705</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id67"/><label kind="probability" x="919.42" y="733">0.11764705882352941</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id68"/><label kind="probability" x="959.16" y="733">0.058823529411764705</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id16"/><label kind="probability" x="1133.7600000000002" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id80"/><target ref="id69"/><label kind="probability" x="974.69" y="733">0.029411764705882353</label> 
+</transition> 
+<transition controllable="false"><source ref="id8"/><target ref="id81"/><label kind="assignment" x="99.5" y="1479">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 8,
+acousticness = 0,
+danceability = 7,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id81"/><target ref="id70"/><label kind="probability" x="2799.5" y="1469">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id9"/><target ref="id82"/><label kind="assignment" x="99.59999999999991" y="627">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 4,
+acousticness = 0,
+danceability = 7,
+energy = 4</label></transition> 
+<transition controllable="false"><source ref="id82"/><target ref="id71"/><label kind="probability" x="2514.6000000000004" y="617">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id10"/><target ref="id83"/><label kind="assignment" x="99.59999999999991" y="1666">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 5,
+acousticness = 2,
+danceability = 8,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id83"/><target ref="id70"/><label kind="probability" x="2643.4" y="1656">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id11"/><target ref="id84"/><label kind="assignment" x="100.0" y="1218">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 7,
+acousticness = 0,
+danceability = 5,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id84"/><target ref="id70"/><label kind="probability" x="1721.0" y="1208">0.3333333333333333</label> 
+</transition> 
+<transition controllable="false"><source ref="id84"/><target ref="id71"/><label kind="probability" x="1597.8" y="1208">0.6666666666666666</label> 
+</transition> 
+<transition controllable="false"><source ref="id12"/><target ref="id85"/><label kind="assignment" x="99.90000000000009" y="1608">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 6,
+acousticness = 1,
+danceability = 4,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id85"/><target ref="id70"/><label kind="probability" x="2363.1" y="1598">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id13"/><target ref="id86"/><label kind="assignment" x="99.80000000000018" y="798">c = 0,
+track += 1,
+min_duration = 3,
+max_duration = 6,
+acousticness = 3,
+danceability = 3,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id86"/><target ref="id71"/><label kind="probability" x="2764.3999999999996" y="788">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id14"/><target ref="id87"/><label kind="assignment" x="99.79999999999995" y="1598">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 11,
+acousticness = 0,
+danceability = 4,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id87"/><target ref="id70"/><label kind="probability" x="2817.2" y="1588">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id15"/><target ref="id88"/><label kind="assignment" x="99.90000000000009" y="1030">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 10,
+acousticness = 0,
+danceability = 6,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id88"/><target ref="id71"/><label kind="probability" x="1597.8999999999999" y="1020">0.6666666666666666</label> 
+</transition> 
+<transition controllable="false"><source ref="id88"/><target ref="id70"/><label kind="probability" x="1537.1" y="1020">0.3333333333333333</label> 
+</transition> 
+<transition controllable="false"><source ref="id16"/><target ref="id89"/><label kind="assignment" x="99.09999999999991" y="913">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 6,
+acousticness = 0,
+danceability = 7,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id89"/><target ref="id70"/><label kind="probability" x="1319.9" y="903">0.5</label> 
+</transition> 
+<transition controllable="false"><source ref="id89"/><target ref="id71"/><label kind="probability" x="1598.7" y="903">0.5</label> 
+</transition> 
+<transition controllable="false"><source ref="id17"/><target ref="id90"/><label kind="assignment" x="99.59999999999991" y="954">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 9,
+acousticness = 0,
+danceability = 6,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id90"/><target ref="id71"/><label kind="probability" x="3200.6000000000004" y="944">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id18"/><target ref="id91"/><label kind="assignment" x="99.29999999999995" y="1597">c = 0,
+track += 1,
+min_duration = 3,
+max_duration = 9,
+acousticness = 0,
+danceability = 2,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id91"/><target ref="id70"/><label kind="probability" x="1145.7" y="1587">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id19"/><target ref="id92"/><label kind="assignment" x="99.69999999999982" y="699">c = 0,
+track += 1,
+min_duration = 4,
+max_duration = 8,
+acousticness = 3,
+danceability = 4,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id92"/><target ref="id71"/><label kind="probability" x="3038.5" y="689">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id20"/><target ref="id93"/><label kind="assignment" x="99.40000000000009" y="825">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 2,
+danceability = 6,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id93"/><target ref="id71"/><label kind="probability" x="3106.8" y="815">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id21"/><target ref="id94"/><label kind="assignment" x="99.40000000000009" y="1061">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 4,
+danceability = 4,
+energy = 4</label></transition> 
+<transition controllable="false"><source ref="id94"/><target ref="id71"/><label kind="probability" x="2880.8" y="1051">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id22"/><target ref="id95"/><label kind="assignment" x="99.09999999999991" y="1320">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 9,
+acousticness = 0,
+danceability = 5,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id95"/><target ref="id71"/><label kind="probability" x="2985.1000000000004" y="1310">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id23"/><target ref="id96"/><label kind="assignment" x="99.79999999999995" y="991">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 1,
+danceability = 7,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id96"/><target ref="id71"/><label kind="probability" x="1598.0" y="981">0.75</label> 
+</transition> 
+<transition controllable="false"><source ref="id96"/><target ref="id70"/><label kind="probability" x="1159.2" y="981">0.25</label> 
+</transition> 
+<transition controllable="false"><source ref="id24"/><target ref="id97"/><label kind="assignment" x="99.70000000000005" y="1739">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 5,
+acousticness = 1,
+danceability = 7,
+energy = 9</label></transition> 
+<transition controllable="false"><source ref="id97"/><target ref="id70"/><label kind="probability" x="1897.3" y="1729">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id25"/><target ref="id98"/><label kind="assignment" x="99.70000000000005" y="1835">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 7,
+acousticness = 0,
+danceability = 6,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id98"/><target ref="id70"/><label kind="probability" x="1483.3" y="1825">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id26"/><target ref="id99"/><label kind="assignment" x="99.90000000000009" y="1216">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 6,
+danceability = 7,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id99"/><target ref="id71"/><label kind="probability" x="3160.3" y="1206">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id27"/><target ref="id100"/><label kind="assignment" x="99.59999999999991" y="1718">c = 0,
+track += 1,
+min_duration = 3,
+max_duration = 5,
+acousticness = 1,
+danceability = 8,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id100"/><target ref="id70"/><label kind="probability" x="1261.4" y="1708">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id28"/><target ref="id101"/><label kind="assignment" x="99.90000000000009" y="1082">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 10,
+acousticness = 0,
+danceability = 6,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id101"/><target ref="id71"/><label kind="probability" x="3142.3" y="1072">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id29"/><target ref="id102"/><label kind="assignment" x="99.70000000000005" y="871">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 9,
+acousticness = 0,
+danceability = 6,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id102"/><target ref="id71"/><label kind="probability" x="1598.1" y="861">0.5</label> 
+</transition> 
+<transition controllable="false"><source ref="id102"/><target ref="id70"/><label kind="probability" x="1847.3" y="861">0.5</label> 
+</transition> 
+<transition controllable="false"><source ref="id30"/><target ref="id103"/><label kind="assignment" x="99.40000000000009" y="801">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 6,
+acousticness = 0,
+danceability = 5,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id103"/><target ref="id71"/><label kind="probability" x="2466.8" y="791">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id31"/><target ref="id104"/><label kind="assignment" x="99.09999999999991" y="1717">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 5,
+acousticness = 0,
+danceability = 8,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id104"/><target ref="id70"/><label kind="probability" x="1567.9" y="1707">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id32"/><target ref="id105"/><label kind="assignment" x="100.0" y="510">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 4,
+acousticness = 5,
+danceability = 8,
+energy = 3</label></transition> 
+<transition controllable="false"><source ref="id105"/><target ref="id71"/><label kind="probability" x="2694.2" y="500">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id33"/><target ref="id106"/><label kind="assignment" x="99.19999999999982" y="633">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 0,
+danceability = 4,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id106"/><target ref="id71"/><label kind="probability" x="2843.0" y="623">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id34"/><target ref="id107"/><label kind="assignment" x="99.59999999999991" y="545">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 19,
+acousticness = 1,
+danceability = 5,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id107"/><target ref="id71"/><label kind="probability" x="2260.6000000000004" y="535">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id35"/><target ref="id108"/><label kind="assignment" x="99.40000000000009" y="513">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 7,
+acousticness = 0,
+danceability = 5,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id108"/><target ref="id71"/><label kind="probability" x="1958.8" y="503">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id36"/><target ref="id109"/><label kind="assignment" x="100.0" y="933">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 8,
+acousticness = 0,
+danceability = 2,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id109"/><target ref="id71"/><label kind="probability" x="2748.2" y="923">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id37"/><target ref="id110"/><label kind="assignment" x="99.29999999999995" y="645">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 9,
+acousticness = 1,
+danceability = 5,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id110"/><target ref="id71"/><label kind="probability" x="1912.9" y="635">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id38"/><target ref="id111"/><label kind="assignment" x="99.79999999999995" y="1461">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 6,
+acousticness = 0,
+danceability = 5,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id111"/><target ref="id71"/><label kind="probability" x="1598.0" y="1451">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id39"/><target ref="id112"/><label kind="assignment" x="99.20000000000005" y="1380">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 6,
+acousticness = 0,
+danceability = 7,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id112"/><target ref="id71"/><label kind="probability" x="1623.0" y="1370">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id40"/><target ref="id113"/><label kind="assignment" x="99.90000000000009" y="1265">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 8,
+acousticness = 0,
+danceability = 7,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id113"/><target ref="id71"/><label kind="probability" x="1597.8999999999999" y="1255">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id41"/><target ref="id114"/><label kind="assignment" x="99.79999999999995" y="1365">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 6,
+acousticness = 0,
+danceability = 8,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id114"/><target ref="id71"/><label kind="probability" x="1598.0" y="1355">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id42"/><target ref="id115"/><label kind="assignment" x="99.79999999999995" y="1859">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 6,
+acousticness = 1,
+danceability = 6,
+energy = 4</label></transition> 
+<transition controllable="false"><source ref="id115"/><target ref="id70"/><label kind="probability" x="1829.2" y="1849">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id43"/><target ref="id116"/><label kind="assignment" x="99.79999999999995" y="1338">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 8,
+acousticness = 0,
+danceability = 6,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id116"/><target ref="id71"/><label kind="probability" x="2314.4" y="1328">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id44"/><target ref="id117"/><label kind="assignment" x="99.59999999999991" y="1725">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 16,
+acousticness = 3,
+danceability = 7,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id117"/><target ref="id70"/><label kind="probability" x="2251.4" y="1715">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id45"/><target ref="id118"/><label kind="assignment" x="99.70000000000005" y="1145">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 8,
+acousticness = 0,
+danceability = 7,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id118"/><target ref="id70"/><label kind="probability" x="1991.3" y="1135">0.5</label> 
+</transition> 
+<transition controllable="false"><source ref="id118"/><target ref="id71"/><label kind="probability" x="1598.1" y="1135">0.5</label> 
+</transition> 
+<transition controllable="false"><source ref="id46"/><target ref="id119"/><label kind="assignment" x="99.5" y="1229">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 8,
+acousticness = 2,
+danceability = 5,
+energy = 4</label></transition> 
+<transition controllable="false"><source ref="id119"/><target ref="id71"/><label kind="probability" x="2848.7" y="1219">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id47"/><target ref="id120"/><label kind="assignment" x="99.09999999999991" y="1307">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 2,
+acousticness = 8,
+danceability = 5,
+energy = 1</label></transition> 
+<transition controllable="false"><source ref="id120"/><target ref="id71"/><label kind="probability" x="2051.1000000000004" y="1297">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id48"/><target ref="id121"/><label kind="assignment" x="99.59999999999991" y="1841">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 3,
+danceability = 6,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id121"/><target ref="id70"/><label kind="probability" x="2183.4" y="1831">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id49"/><target ref="id122"/><label kind="assignment" x="99.40000000000009" y="1198">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 9,
+acousticness = 0,
+danceability = 4,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id122"/><target ref="id71"/><label kind="probability" x="2602.8" y="1188">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id50"/><target ref="id123"/><label kind="assignment" x="99.09999999999991" y="1776">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 5,
+acousticness = 6,
+danceability = 7,
+energy = 4</label></transition> 
+<transition controllable="false"><source ref="id123"/><target ref="id70"/><label kind="probability" x="2517.9" y="1766">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id51"/><target ref="id124"/><label kind="assignment" x="99.29999999999995" y="1465">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 7,
+acousticness = 1,
+danceability = 7,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id124"/><target ref="id71"/><label kind="probability" x="1856.9" y="1455">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id52"/><target ref="id125"/><label kind="assignment" x="99.49000000000001" y="974">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 8,
+acousticness = 0,
+danceability = 7,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id125"/><target ref="id70"/><label kind="probability" x="1145.51" y="964">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id53"/><target ref="id126"/><label kind="assignment" x="99.56" y="828">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 7,
+danceability = 4,
+energy = 2</label></transition> 
+<transition controllable="false"><source ref="id126"/><target ref="id70"/><label kind="probability" x="1145.44" y="818">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id54"/><target ref="id127"/><label kind="assignment" x="99.70000000000005" y="163">c = 0,
+track += 1,
+min_duration = 8,
+max_duration = 8,
+acousticness = 5,
+danceability = 3,
+energy = 3</label></transition> 
+<transition controllable="false"><source ref="id127"/><target ref="id71"/><label kind="probability" x="1598.1" y="153">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id55"/><target ref="id128"/><label kind="assignment" x="99.45000000000005" y="624">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 14,
+acousticness = 0,
+danceability = 3,
+energy = 9</label></transition> 
+<transition controllable="false"><source ref="id128"/><target ref="id70"/><label kind="probability" x="1145.55" y="614">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id56"/><target ref="id129"/><label kind="assignment" x="99.40000000000009" y="207">c = 0,
+track += 1,
+min_duration = 3,
+max_duration = 3,
+acousticness = 2,
+danceability = 3,
+energy = 4</label></transition> 
+<transition controllable="false"><source ref="id129"/><target ref="id71"/><label kind="probability" x="1598.3999999999999" y="197">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id57"/><target ref="id130"/><label kind="assignment" x="99.05000000000001" y="998">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 4,
+acousticness = 0,
+danceability = 5,
+energy = 9</label></transition> 
+<transition controllable="false"><source ref="id130"/><target ref="id70"/><label kind="probability" x="1145.95" y="988">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id58"/><target ref="id131"/><label kind="assignment" x="99.66999999999996" y="1131">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 5,
+acousticness = 0,
+danceability = 4,
+energy = 9</label></transition> 
+<transition controllable="false"><source ref="id131"/><target ref="id70"/><label kind="probability" x="1145.33" y="1121">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id59"/><target ref="id132"/><label kind="assignment" x="99.08999999999997" y="1149">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 1,
+danceability = 8,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id132"/><target ref="id70"/><label kind="probability" x="1145.91" y="1139">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id60"/><target ref="id133"/><label kind="assignment" x="99.45000000000005" y="719">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 4,
+acousticness = 6,
+danceability = 4,
+energy = 1</label></transition> 
+<transition controllable="false"><source ref="id133"/><target ref="id70"/><label kind="probability" x="1145.55" y="709">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id61"/><target ref="id134"/><label kind="assignment" x="99.50999999999999" y="1272">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 6,
+acousticness = 2,
+danceability = 6,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id134"/><target ref="id70"/><label kind="probability" x="1145.49" y="1262">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id62"/><target ref="id135"/><label kind="assignment" x="99.32000000000005" y="562">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 7,
+acousticness = 2,
+danceability = 5,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id135"/><target ref="id70"/><label kind="probability" x="1145.6799999999998" y="552">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id63"/><target ref="id136"/><label kind="assignment" x="99.59999999999991" y="332">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 9,
+acousticness = 2,
+danceability = 3,
+energy = 5</label></transition> 
+<transition controllable="false"><source ref="id136"/><target ref="id71"/><label kind="probability" x="1598.2" y="322">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id64"/><target ref="id137"/><label kind="assignment" x="99.5" y="256">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 4,
+acousticness = 5,
+danceability = 6,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id137"/><target ref="id71"/><label kind="probability" x="1598.3" y="246">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id65"/><target ref="id138"/><label kind="assignment" x="99.09999999999991" y="667">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 10,
+acousticness = 2,
+danceability = 7,
+energy = 8</label></transition> 
+<transition controllable="false"><source ref="id138"/><target ref="id71"/><label kind="probability" x="1598.7" y="657">0.8</label> 
+</transition> 
+<transition controllable="false"><source ref="id138"/><target ref="id70"/><label kind="probability" x="1145.9" y="657">0.2</label> 
+</transition> 
+<transition controllable="false"><source ref="id66"/><target ref="id139"/><label kind="assignment" x="99.29999999999995" y="802">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 6,
+acousticness = 0,
+danceability = 6,
+energy = 6</label></transition> 
+<transition controllable="false"><source ref="id139"/><target ref="id71"/><label kind="probability" x="1598.5" y="792">0.5</label> 
+</transition> 
+<transition controllable="false"><source ref="id139"/><target ref="id70"/><label kind="probability" x="1325.7" y="792">0.5</label> 
+</transition> 
+<transition controllable="false"><source ref="id67"/><target ref="id140"/><label kind="assignment" x="99.55999999999995" y="328">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 8,
+acousticness = 0,
+danceability = 6,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id140"/><target ref="id71"/><label kind="probability" x="1598.24" y="318">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id68"/><target ref="id141"/><label kind="assignment" x="99.70000000000005" y="301">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 5,
+acousticness = 7,
+danceability = 5,
+energy = 3</label></transition> 
+<transition controllable="false"><source ref="id141"/><target ref="id71"/><label kind="probability" x="1598.1" y="291">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id69"/><target ref="id142"/><label kind="assignment" x="99.83000000000004" y="512">c = 0,
+track += 1,
+min_duration = 1,
+max_duration = 4,
+acousticness = 8,
+danceability = 6,
+energy = 1</label></transition> 
+<transition controllable="false"><source ref="id142"/><target ref="id70"/><label kind="probability" x="1145.17" y="502">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id70"/><target ref="id143"/><label kind="assignment" x="100.0" y="1152">c = 0</label><label kind="guard" x="1345.0" y="1092">c &gt;= 1</label></transition> 
+<transition controllable="false"><source ref="id143"/><target ref="id6"/><label kind="probability" x="1609.7" y="1142">0.4444444444444444</label> 
+</transition> 
+<transition controllable="false"><source ref="id143"/><target ref="id72"/><label kind="probability" x="1276.2" y="1142">0.3055555555555556</label> 
+</transition> 
+<transition controllable="false"><source ref="id143"/><target ref="id7"/><label kind="probability" x="1713.1399999999999" y="1142">0.2222222222222222</label> 
+</transition> 
+<transition controllable="false"><source ref="id143"/><target ref="id73"/><label kind="probability" x="1416.3" y="1142">0.027777777777777776</label> 
+</transition> 
+<transition controllable="false"><source ref="id71"/><target ref="id144"/><label kind="assignment" x="99.20000000000005" y="832">c = 0</label><label kind="guard" x="1797.0" y="772">c &gt;= min_duration</label></transition> 
+<transition controllable="false"><source ref="id144"/><target ref="id72"/><label kind="probability" x="2118.6" y="822">0.10416666666666667</label> 
+</transition> 
+<transition controllable="false"><source ref="id144"/><target ref="id7"/><label kind="probability" x="2617.94" y="822">0.3541666666666667</label> 
+</transition> 
+<transition controllable="false"><source ref="id144"/><target ref="id6"/><label kind="probability" x="1785.1" y="822">0.5416666666666666</label> 
+</transition> 
+<transition controllable="false"><source ref="id72"/><target ref="id145"/><label kind="assignment" x="99.79999999999995" y="748">c = 0</label><label kind="guard" x="1476.0" y="688">c &gt;= (LONG_PAUSE / 2)</label></transition> 
+<transition controllable="false"><source ref="id145"/><target ref="id7"/><label kind="probability" x="1975.3400000000001" y="738">0.4375</label> 
+</transition> 
+<transition controllable="false"><source ref="id145"/><target ref="id6"/><label kind="probability" x="1609.9" y="738">0.4375</label> 
+</transition> 
+<transition controllable="false"><source ref="id145"/><target ref="id73"/><label kind="probability" x="1416.5" y="738">0.125</label> 
+</transition> 
+<transition controllable="false"><source ref="id74"/><target ref="id146"/><label kind="assignment" x="99.59999999999991" y="48">c = 0,
+track += 1,
+min_duration = 3,
+max_duration = 6,
+acousticness = 2,
+danceability = 7,
+energy = 9</label></transition> 
+<transition controllable="false"><source ref="id146"/><target ref="id71"/><label kind="probability" x="2092.6000000000004" y="38">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id75"/><target ref="id147"/><label kind="assignment" x="100.0" y="304">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 4,
+acousticness = 0,
+danceability = 3,
+energy = 9</label></transition> 
+<transition controllable="false"><source ref="id147"/><target ref="id70"/><label kind="probability" x="2193.0" y="294">1.0</label> 
+</transition> 
+<transition controllable="false"><source ref="id76"/><target ref="id148"/><label kind="assignment" x="99.59999999999991" y="369">c = 0,
+track += 1,
+min_duration = 2,
+max_duration = 6,
+acousticness = 0,
+danceability = 6,
+energy = 7</label></transition> 
+<transition controllable="false"><source ref="id148"/><target ref="id70"/><label kind="probability" x="2473.4" y="359">1.0</label> 
+</transition> 
+
+<transition controllable="true"><source ref="id0"/><target ref="id1"/>
+</transition>
+<transition controllable="true"><source ref="id0"/><target ref="id2"/>
+</transition>
+<transition controllable="true"><source ref="id0"/><target ref="id3"/>
+</transition>
+<transition controllable="true"><source ref="id0"/><target ref="id4"/>
+</transition>
+<transition controllable="true"><source ref="id0"/><target ref="id5"/>
+</transition>
+<transition controllable="true"><source ref="id1"/><target ref="id6"/>
+</transition>
+<transition controllable="true"><source ref="id2"/><target ref="id6"/>
+</transition>
+<transition controllable="true"><source ref="id3"/><target ref="id6"/>
+</transition>
+<transition controllable="true"><source ref="id4"/><target ref="id7"/>
+</transition>
+<transition controllable="true"><source ref="id5"/><target ref="id7"/>
+</transition><transition controllable="true"><source ref="id6"/><target ref="id77"/><label kind="guard" x="2079.7" y="1149.0">track &gt;= MAX_TRACK</label></transition> 
+<transition controllable="true"><source ref="id7"/><target ref="id77"/><label kind="guard" x="1339.7" y="683.61">track &gt;= MAX_TRACK</label></transition> 
+
+<transition controllable="true"><source ref="id73"/><target ref="id74"/>
+<label kind="guard" x="1845.4" y="388.75">track &lt; MAX_TRACK</label>
+</transition>
+<transition controllable="true"><source ref="id73"/><target ref="id75"/>
+<label kind="guard" x="1669.0" y="388.75">track &lt; MAX_TRACK</label>
+</transition>
+<transition controllable="true"><source ref="id73"/><target ref="id76"/>
+<label kind="guard" x="1809.4" y="388.75">track &lt; MAX_TRACK</label>
+</transition><transition controllable="true"><source ref="id73"/><target ref="id77"/><label kind="guard" x="1692.8999999999999" y="328.75">track &gt;= MAX_TRACK</label></transition> 
+
+</template>
+<system>system SpotifyJourney;</system>
+
+<queries>
+<query>
+<formula>E&lt;&gt; SpotifyJourney.end &amp;&amp; track == 20</formula>
+</query>
+<query>
+<formula>strategy long = maxE(duration_c) [&lt;= 1000]: &lt;&gt; SpotifyJourney.end</formula>
+</query>
+<query>
+<formula>strategy opt = maxE(danceability_c) [&lt;= 1000]: &lt;&gt; SpotifyJourney.end</formula>
+</query>
+<query>
+<formula>strategy neutral = control: A&lt;&gt; SpotifyJourney.end &amp;&amp; visited_start</formula>
+</query>
+<query>
+<formula>strategy opt = maxE((- danceability_c - acousticness_c + energy_c) * duration_c) [&lt;= 1000]: &lt;&gt; (SpotifyJourney.end) under neutral</formula>
+</query>
+</queries></nta>
