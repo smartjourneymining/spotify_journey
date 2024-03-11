@@ -1,9 +1,9 @@
 # spotify_journey
 
-Repository for the work ``Nudging Strategies for User Journeys:
-Take a Path on the Wild Side'' by Johnsen, Kobialka, Pferscher and Tapia Tarifa.
+Repository for the work "Nudging Strategies for User Journeys:
+Take a Path on the Wild Side" by Johnsen, Kobialka, Pferscher and Tapia Tarifa.
 
-The model checker UPPAAL is used to generate strategies to nudge the listening behavior of a professor in computer science toward a ``wilder'' direction.
+The model checker UPPAAL is used to generate strategies to nudge the listening behavior of a professor in computer science toward a "wilder" direction.
 
 We use the [Music Music-Streaming Sessions Dataset](https://www.aicrowd.com/challenges/spotify-sequential-skip-prediction-challenge) published by Brost et al [[1]](#1) to learn music-streaming user journeys with automata learning.
 
